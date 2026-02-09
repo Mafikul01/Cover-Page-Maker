@@ -1,6 +1,8 @@
 :root {
     --bg: #0f172a;
     --primary: #6366f1;
+    --fb-blue: #1877F2;
+    --wa-green: #25D366;
 }
 
 body {
@@ -31,7 +33,7 @@ body {
 .orb-2 {
     width: 300px;
     height: 300px;
-    background: #9333ea;
+    background: #4f46e5;
     bottom: -50px;
     right: -50px;
 }
@@ -53,24 +55,50 @@ body {
     transition: 0.3s;
 }
 
-.social-links {
-    font-size: 24px;
-    gap: 2px; 
-    margin-top: 10px;
-    align-items: center; 
+/* Layout - Fixed Hiding Logic */
+.main-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    height: 100vh;
+    transition: grid-template-columns 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* হোয়াটসঅ্যাপের রঙ (মাউস নিলে) */
-.social-links a[title="WhatsApp"] {
-    color: #25D366; 
+.main-layout.sidebar-hidden {
+    grid-template-columns: 0px 1fr;
 }
 
-/* ফেসবুকের রঙ (মাউস নিলে) */
-.social-links a[title="Messenger"] {
-    color: #1877F2; /* Facebook Blue */
+.sidebar {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100vh;
+    overflow: hidden;
+    transition: 0.5s ease;
 }
 
-/* Developer & Social Icons */
+.sidebar-content-wrapper {
+    min-width: 380px;
+    height: 100vh;
+    padding: 25px;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Sidebar Elements */
+.sidebar-header h2 {
+    color: var(--primary);
+    margin: 0;
+    font-size: 22px;
+}
+
+.sidebar-header p {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
 .developer-info {
     margin-top: 15px;
     padding-top: 10px;
@@ -79,77 +107,43 @@ body {
     color: #cbd5e1;
 }
 
-.developer-info strong {
-    color: var(--primary);
-}
-
 .social-links {
     display: flex;
     gap: 15px;
-    margin-top: 10px;
+    margin-top: 12px;
+    align-items: center;
 }
 
-.social-links img {
-    width: 22px;
-    height: 22px;
-    filter: brightness(0) invert(1);
-    opacity: 0.7;
-    transition: 0.3s;
+.social-links a {
+    text-decoration: none;
+    font-size: 24px;
+    transition: 0.3s ease;
+    display: inline-flex;
 }
 
-.social-links a:hover img {
-    opacity: 1;
-    transform: scale(1.1);
+.social-links a .fa-facebook {
+    color: var(--fb-blue) !important;
 }
 
-/* Layout */
-.main-layout {
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    height: 100vh;
-    transition: 0.5s ease;
+.social-links a .fa-whatsapp {
+    color: var(--wa-green) !important;
 }
 
-.main-layout.sidebar-hidden {
-    grid-template-columns: 0px 1fr;
-}
-
-.sidebar {
-    background: rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 25px;
-    padding-top: 70px;
-    box-sizing: border-box;
-    transition: 0.5s ease;
-    overflow: hidden;
-}
-.sidebar-header h2 {
-    color: #6366f1; /* আপনার পছন্দমতো কালার কোড দিন */
-    margin: 0;
-    font-size: 22px;
-}
-
-/* "Customize & Download" লেখার রঙ পরিবর্তন */
-.sidebar-header p {
-    color: #94a3b8; /* হালকা ছাই রঙ বা আপনার পছন্দমতো রঙ */
-    font-size: 13px;
-    margin-top: 5px;
-}
-.main-layout.sidebar-hidden .sidebar {
-    padding: 0;
-    opacity: 0;
-    transform: translateX(-100%);
-}
-
+/* Form Scroll & Inputs */
 .form-scroll {
     flex: 1;
     overflow-y: auto;
     margin-top: 20px;
-    padding-right: 5px;
+    padding-right: 8px;
+}
+
+.form-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.form-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 
 .input-card {
@@ -181,7 +175,7 @@ input {
 
 .flex-row {
     display: flex;
-    gap: 8px;
+    gap: 10px;
 }
 
 .download-btn {
@@ -193,9 +187,10 @@ input {
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-/* PDF Preview */
+/* PDF Preview Area */
 .preview-area {
     display: flex;
     justify-content: center;
@@ -206,7 +201,7 @@ input {
 
 #cover-page {
     width: 210mm;
-    height: 296.6mm;
+    height: 297mm;
     background: #fff;
     color: #000;
     padding: 20mm;
@@ -214,21 +209,21 @@ input {
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-    transform: scale(0.8);
+    transform: scale(0.85);
     transform-origin: top;
 }
 
+/* PDF Elements */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px;
-    position: relative;
+    margin-bottom: 30px;
 }
 
 .logo-box {
-    width: 125px;
-    height: 125px;
+    width: 110px;
+    height: 110px;
 }
 
 .logo-box img {
@@ -237,58 +232,48 @@ input {
     object-fit: contain;
 }
 
-.left-logo {
-    margin-top: -15mm;
-    margin-left: -15mm;
-}
-
-.right-logo {
-    margin-top: -15mm;
-    margin-right: -15mm;
-}
-
 .uni-info {
     text-align: center;
     flex: 1;
-    margin-top: 10px;
 }
 
 .uni-info h1 {
     font-family: 'Times New Roman', serif;
-    font-size: 32px;
+    font-size: 30px;
     margin: 0;
 }
 
 .uni-info h2 {
     font-family: 'Times New Roman', serif;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: normal;
     margin: 5px 0;
 }
 
 .lab-title-box {
     text-align: center;
-    margin: 35px 0;
+    margin: 30px 0;
 }
 
 .lab-title-box h3 {
     font-family: monospace;
-    font-size: 28px;
-    font-weight: normal;
-    margin: 0;
+    font-size: 26px;
+    border: 1px solid #000;
+    padding: 5px 15px;
+    display: inline-block;
 }
 
 .course-line {
     text-align: center;
     font-weight: bold;
-    font-size: 19px;
-    margin-bottom: 30px;
+    font-size: 18px;
+    margin-bottom: 25px;
 }
 
 .exp-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .exp-table td {
@@ -302,7 +287,6 @@ input {
     width: 130px;
 }
 
-/* Submission Area */
 .submit-grid {
     display: flex;
     border: 1px solid black;
@@ -311,7 +295,7 @@ input {
 
 .sub-box {
     width: 50%;
-    padding: 20px;
+    padding: 15px;
 }
 
 .sub-left {
@@ -320,24 +304,24 @@ input {
 
 .script-text {
     font-family: 'Brush Script MT', cursive;
-    font-size: 28px;
-    display: block;
-    margin-bottom: 15px;
-}
-
-.teacher-label {
-    font-weight: bold;
+    font-size: 26px;
     display: block;
     margin-bottom: 12px;
 }
 
+.teacher-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
 .teacher {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     font-size: 14px;
 }
 
 .row {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-size: 16px;
 }
 
@@ -349,8 +333,8 @@ input {
 }
 
 .sig-line {
-    border-top: 2px solid black;
-    width: 230px;
+    border-top: 1.5px solid black;
+    width: 220px;
     text-align: center;
     padding-top: 5px;
     font-weight: bold;
@@ -358,8 +342,8 @@ input {
 }
 
 .box {
-    width: 140px;
-    height: 55px;
+    width: 130px;
+    height: 50px;
     border: 1px solid black;
 }
 
@@ -367,13 +351,4 @@ input {
     text-align: center;
     font-size: 12px;
     font-weight: bold;
-}
-
-.form-scroll::-webkit-scrollbar {
-    width: 5px;
-}
-
-.form-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
 }
