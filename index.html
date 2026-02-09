@@ -1,123 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CoverGen Pro - Varendra University</title>
+    <title>VU Cover Page Generator</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </head>
   <body>
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
 
-    <div class="main-layout">
-      <aside class="sidebar">
+    <button class="toggle-btn" onclick="toggleSidebar()" title="Toggle Editor">
+      ☰
+    </button>
+
+    <div class="main-layout" id="layout">
+      <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <h2>🎨 Cover Editor</h2>
-          <p>Live Preview & Fixed Logos</p>
+          <p>Customize & Download</p>
+          
+          <div class="developer-info">
+            <span>Developed by <strong>Mafikul Islam</strong></span>
+            <div class="social-links">
+              <a href="https://wa.me/+8801788302771" target="_blank" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+              <a href="https://www.facebook.com/Mafikul01" target="_blank" title="Messenger">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </div>
+          </div>
         </div>
 
         <div class="form-scroll">
           <div class="input-card">
             <label>University & Department</label>
-            <input
-              type="text"
-              id="deptIn"
-              value="Department of CSE"
-              oninput="updatePreview()"
-            />
-            <input
-              type="text"
-              id="uniIn"
-              value="Varendra University"
-              oninput="updatePreview()"
-            />
+            <input type="text" id="deptIn" value="Department of CSE" oninput="updatePreview()"/>
+            <input type="text" id="uniIn" value="Varendra University" oninput="updatePreview()"/>
           </div>
 
           <div class="input-card">
             <label>Course Title</label>
-            <input
-              type="text"
-              id="courseTitleIn"
-              value="Digital Signal Processing Lab"
-              oninput="updatePreview()"
-            />
+            <input type="text" id="courseTitleIn" value="" oninput="updatePreview()"/>
           </div>
 
           <div class="input-card">
-            <label>Experiment Details</label>
+            <label>Experiment Info</label>
             <div class="flex-row">
-              <input
-                type="text"
-                id="expNoIn"
-                value="01"
-                placeholder="No"
-                style="width: 30%"
-                oninput="updatePreview()"
-              />
-              <input
-                type="text"
-                id="expNameIn"
-                value="Generation and Analysis of Elementary Discrete-Time Signals"
-                placeholder="Name"
-                oninput="updatePreview()"
-              />
+              <input type="text" id="expNoIn" value="" style="width: 30%" oninput="updatePreview()"/>
+              <input type="text" id="expNameIn" value="" oninput="updatePreview()"/>
             </div>
           </div>
 
           <div class="input-card">
-            <label>Student Information</label>
-            <input
-              type="text"
-              id="stuNameIn"
-              value="Mafikul Islam"
-              oninput="updatePreview()"
-            />
-            <input
-              type="text"
-              id="stuIdIn"
-              value="232311070"
-              oninput="updatePreview()"
-            />
+            <label>Student Details</label>
+            <input type="text" id="stuNameIn" value="" oninput="updatePreview()"/>
+            <input type="text" id="stuIdIn" value="" oninput="updatePreview()"/>
             <div class="flex-row">
-              <input
-                type="text"
-                id="semIn"
-                value="6th"
-                placeholder="Sem"
-                oninput="updatePreview()"
-              />
-              <input
-                type="text"
-                id="secIn"
-                value="B"
-                placeholder="Sec"
-                oninput="updatePreview()"
-              />
+              <input type="text" id="semIn" value="6th" oninput="updatePreview()"/>
+              <input type="text" id="secIn" value="B" oninput="updatePreview()"/>
             </div>
-            <input
-              type="text"
-              id="codeIn"
-              value="CSE-3208"
-              oninput="updatePreview()"
-            />
+            <input type="text" id="codeIn" value="CSE - 3208" oninput="updatePreview()"/>
           </div>
 
           <div class="input-card">
-            <label>Submitted To</label>
-            <input
-              type="text"
-              id="t1Name"
-              value="Teacher Name 1"
-              oninput="updatePreview()"
-            />
-            <input
-              type="text"
-              id="t2Name"
-              value="Teacher Name 2"
-              oninput="updatePreview()"
-            />
+            <label>Instructors</label>
+            <input type="text" id="t1Name" value="Teacher Name 1" oninput="updatePreview()"/>
+            <input type="text" id="t2Name" value="Teacher Name 2" oninput="updatePreview()"/>
           </div>
         </div>
 
@@ -131,14 +83,14 @@
       <main class="preview-area">
         <div id="cover-page">
           <div class="header">
-            <div class="logo-box">
+            <div class="logo-box left-logo">
               <img src="logo/dept.png" alt="Dept Logo" />
             </div>
             <div class="uni-info">
               <h1 id="deptOut">Department of CSE</h1>
               <h2 id="uniOut">Varendra University</h2>
             </div>
-            <div class="logo-box">
+            <div class="logo-box right-logo">
               <img src="logo/vu.png" alt="VU Logo" />
             </div>
           </div>
@@ -148,10 +100,7 @@
           </div>
 
           <div class="course-line">
-            <p>
-              Course Title:
-              <span id="courseTitleOut">Digital Signal Processing Lab</span>
-            </p>
+            <p>Course Title: <span id="courseTitleOut">Digital Signal Processing Lab</span></p>
           </div>
 
           <table class="exp-table">
@@ -167,32 +116,22 @@
 
           <div class="submit-grid">
             <div class="sub-box sub-left">
-              <span class="script-text"> Submitted By</span>
-              <div class="row">
-                <strong>Name</strong>: <span id="stuNameOut"></span>
-              </div>
-              <div class="row">
-                <strong>ID</strong>: <span id="stuIdOut"></span>
-              </div>
-              <div class="row">
-                <strong>Semester</strong>: <span id="semOut"></span>
-              </div>
-              <div class="row">
-                <strong>Section</strong>: <span id="secOut"></span>
-              </div>
-              <div class="row">
-                <strong>Course code</strong>: <span id="codeOut"></span>
-              </div>
+              <span class="script-text">Submitted By</span>
+              <div class="row"><strong>Name</strong>: <span id="stuNameOut"></span></div>
+              <div class="row"><strong>ID</strong>: <span id="stuIdOut"></span></div>
+              <div class="row"><strong>Semester</strong>: <span id="semOut"></span></div>
+              <div class="row"><strong>Section</strong>: <span id="secOut"></span></div>
+              <div class="row"><strong>Course code</strong>: <span id="codeOut"></span></div>
             </div>
             <div class="sub-box sub-right">
               <span class="script-text">Submitted To</span>
               <div class="teacher">
-                <p class="underline">Course Teacher - 1 :</p>
+                <p class="teacher-label">Course Teacher - 1 :</p>
                 <p><strong>Name:</strong> <span id="t1NameOut"></span></p>
                 <p>Lecturer, Varendra University</p>
               </div>
               <div class="teacher">
-                <p class="underline">Course Teacher - 2 :</p>
+                <p class="teacher-label">Course Teacher - 2 :</p>
                 <p><strong>Name:</strong> <span id="t2NameOut"></span></p>
                 <p>Lecturer, Varendra University</p>
               </div>
