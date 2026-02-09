@@ -1,153 +1,180 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VU Cover Page Generator</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
 
     <button class="toggle-btn" onclick="toggleSidebar()" title="Toggle Editor">
-      ☰
+        ☰
     </button>
 
     <div class="main-layout" id="layout">
-      <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-          <h2>🎨 Cover Editor</h2>
-          <p>Customize & Download</p>
-          
-          <div class="developer-info">
-            <span>Developed by <strong>Mafikul Islam</strong></span>
-            <div class="social-links">
-              <a href="https://wa.me/+8801788302771" target="_blank" title="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-              </a>
-              <a href="https://www.facebook.com/Mafikul01" target="_blank" title="Messenger">
-                <i class="fa-brands fa-facebook"></i>
-              </a>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content-wrapper">
+                <div class="sidebar-header">
+                    <h2>🎨 VU CSE Cover Page</h2>
+                    <p>Customize & Download</p>
+                    <div class="developer-info">
+                        <span style="font-size: 15px">Developed by
+                            <strong style="color: rgb(2, 222, 83)">Mafikul Islam</strong></span>
+                        <div style="font-size: 12px;" class="sub-text">
+                             <br />
+                            232311070 | 6th B, Dept. of CSE <br />
+                            33rd Batch
+                        </div>
+                        <div class="social-links">
+                            <a href="https://wa.me/+8801788302771" target="_blank" title="WhatsApp"><i
+                                    class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/Mafikul01" target="_blank" title="Facebook"><i
+                                    class="fa-brands fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-scroll">
+                    <div class="input-card">
+                        <label>University & Department</label>
+                        <input type="text" id="deptIn" value="Department of CSE" oninput="updatePreview()" />
+                        <input type="text" id="uniIn" value="Varendra University" oninput="updatePreview()" />
+                    </div>
+
+                    <div class="input-card">
+                        <label>Course Info</label>
+                        <input type="text" id="courseTitleIn" placeholder="Digital Signal Processing Lab"
+                            oninput="updatePreview()" />
+                        <input type="text" id="codeIn" placeholder="Course Code (e.g. CSE-312)"
+                            oninput="updatePreview()" />
+                    </div>
+
+                    <div class="input-card">
+                        <label>Report & Experiment Info</label>
+                        <div class="flex-row">
+                            <input type="text" id="reportNoIn" placeholder="Report No: 01" style="width: 50%"
+                                oninput="updatePreview()" />
+                            <input type="text" id="expNoIn" placeholder="Exp No: 01" style="width: 50%"
+                                oninput="updatePreview()" />
+                        </div>
+                        <input type="text" id="expNameIn" placeholder="Name of Experiment" oninput="updatePreview()"
+                            style="margin-top: 8px" />
+                    </div>
+
+                    <div class="input-card">
+                        <label>Student Details</label>
+                        <input type="text" id="stuNameIn" placeholder="Enter Your Name" oninput="updatePreview()" />
+                        <input type="text" id="stuIdIn" placeholder="Student ID" oninput="updatePreview()" />
+                        <div class="flex-row">
+                            <input type="text" id="semIn" placeholder="Semester" oninput="updatePreview()" />
+                            <input type="text" id="secIn" placeholder="Section" oninput="updatePreview()" />
+                        </div>
+                    </div>
+
+                    <div class="input-card">
+                        <label>Instructors</label>
+                        <input type="text" id="t1Name" placeholder="Teacher Name 1" oninput="updatePreview()" />
+                        <input type="text" id="t2Name" placeholder="Teacher Name 2" oninput="updatePreview()" />
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <button class="download-btn" onclick="downloadPDF()">
+                        🚀 Download PDF
+                    </button>
+                </div>
             </div>
-          </div>
-        </div>
+        </aside>
 
-        <div class="form-scroll">
-          <div class="input-card">
-            <label>University & Department</label>
-            <input type="text" id="deptIn" value="Department of CSE" oninput="updatePreview()"/>
-            <input type="text" id="uniIn" value="Varendra University" oninput="updatePreview()"/>
-          </div>
+        <main class="preview-area">
+            <div id="cover-page">
+                <div class="header">
+                    <div class="logo-box left-logo">
+                        <img src="logo/dept.png" alt="Dept Logo" />
+                    </div>
+                    <div class="uni-info">
+                        <h1 id="deptOut">Department of CSE</h1>
+                        <h2 id="uniOut">Varendra University</h2>
+                    </div>
+                    <div class="logo-box right-logo">
+                        <img src="logo/vu.png" alt="VU Logo" />
+                    </div>
+                </div>
 
-          <div class="input-card">
-            <label>Course Title</label>
-            <input type="text" id="courseTitleIn" value="" oninput="updatePreview()"/>
-          </div>
+                <div class="lab-title-box">
+                    <h3>Lab Report – <span id="reportNoOutTop">01</span></h3>
+                </div>
 
-          <div class="input-card">
-            <label>Experiment Info</label>
-            <div class="flex-row">
-              <input type="text" id="expNoIn" value="" style="width: 30%" oninput="updatePreview()"/>
-              <input type="text" id="expNameIn" value="" oninput="updatePreview()"/>
+                <div class="course-line">
+                    <p>
+                        Course Title:
+                        <span id="courseTitleOut">Digital Signal Processing Lab</span>
+                    </p>
+                </div>
+
+                <table class="exp-table">
+                    <tr>
+                        <td class="bold">Exp. no</td>
+                        <td id="expNoOutTable">01</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Exp Name.</td>
+                        <td id="expNameOut">...</td>
+                    </tr>
+                </table>
+
+                <div class="submit-grid">
+                    <div class="sub-box sub-left">
+                        <span class="script-text">Submitted By</span>
+                        <div class="row">
+                            <strong>Name</strong>: <span id="stuNameOut"></span>
+                        </div>
+                        <div class="row">
+                            <strong>ID</strong>: <span id="stuIdOut"></span>
+                        </div>
+                        <div class="row">
+                            <strong>Semester</strong>: <span id="semOut"></span>
+                        </div>
+                        <div class="row">
+                            <strong>Section</strong>: <span id="secOut"></span>
+                        </div>
+                        <div class="row">
+                            <strong>Course code</strong>: <span id="codeOut"></span>
+                        </div>
+                    </div>
+                    <div class="sub-box sub-right">
+                        <span class="script-text">Submitted To</span>
+                        <div class="teacher">
+                            <p class="teacher-label">Course Teacher - 1 :</p>
+                            <p><strong>Name:</strong> <span id="t1NameOut"></span></p>
+                            <p>Lecturer, Varendra University</p>
+                        </div>
+                        <div class="teacher">
+                            <p class="teacher-label">Course Teacher - 2 :</p>
+                            <p><strong>Name:</strong> <span id="t2NameOut"></span></p>
+                            <p>Lecturer, Varendra University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="sig-line">Signature Of The Course Teacher</div>
+                    <div class="marks-box">
+                        <div class="box"></div>
+                        <span>Obtained grade/marks</span>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="input-card">
-            <label>Student Details</label>
-            <input type="text" id="stuNameIn" value="" oninput="updatePreview()"/>
-            <input type="text" id="stuIdIn" value="" oninput="updatePreview()"/>
-            <div class="flex-row">
-              <input type="text" id="semIn" value="6th" oninput="updatePreview()"/>
-              <input type="text" id="secIn" value="B" oninput="updatePreview()"/>
-            </div>
-            <input type="text" id="codeIn" value="CSE - 3208" oninput="updatePreview()"/>
-          </div>
-
-          <div class="input-card">
-            <label>Instructors</label>
-            <input type="text" id="t1Name" value="Teacher Name 1" oninput="updatePreview()"/>
-            <input type="text" id="t2Name" value="Teacher Name 2" oninput="updatePreview()"/>
-          </div>
-        </div>
-
-        <div class="sidebar-footer">
-          <button class="download-btn" onclick="downloadPDF()">
-            🚀 Download PDF
-          </button>
-        </div>
-      </aside>
-
-      <main class="preview-area">
-        <div id="cover-page">
-          <div class="header">
-            <div class="logo-box left-logo">
-              <img src="logo/dept.png" alt="Dept Logo" />
-            </div>
-            <div class="uni-info">
-              <h1 id="deptOut">Department of CSE</h1>
-              <h2 id="uniOut">Varendra University</h2>
-            </div>
-            <div class="logo-box right-logo">
-              <img src="logo/vu.png" alt="VU Logo" />
-            </div>
-          </div>
-
-          <div class="lab-title-box">
-            <h3>Lab Report – <span id="expNoOutTop">01</span></h3>
-          </div>
-
-          <div class="course-line">
-            <p>Course Title: <span id="courseTitleOut">Digital Signal Processing Lab</span></p>
-          </div>
-
-          <table class="exp-table">
-            <tr>
-              <td class="bold">Exp. no</td>
-              <td id="expNoOutTable">01</td>
-            </tr>
-            <tr>
-              <td class="bold">Exp Name</td>
-              <td id="expNameOut">...</td>
-            </tr>
-          </table>
-
-          <div class="submit-grid">
-            <div class="sub-box sub-left">
-              <span class="script-text">Submitted By</span>
-              <div class="row"><strong>Name</strong>: <span id="stuNameOut"></span></div>
-              <div class="row"><strong>ID</strong>: <span id="stuIdOut"></span></div>
-              <div class="row"><strong>Semester</strong>: <span id="semOut"></span></div>
-              <div class="row"><strong>Section</strong>: <span id="secOut"></span></div>
-              <div class="row"><strong>Course code</strong>: <span id="codeOut"></span></div>
-            </div>
-            <div class="sub-box sub-right">
-              <span class="script-text">Submitted To</span>
-              <div class="teacher">
-                <p class="teacher-label">Course Teacher - 1 :</p>
-                <p><strong>Name:</strong> <span id="t1NameOut"></span></p>
-                <p>Lecturer, Varendra University</p>
-              </div>
-              <div class="teacher">
-                <p class="teacher-label">Course Teacher - 2 :</p>
-                <p><strong>Name:</strong> <span id="t2NameOut"></span></p>
-                <p>Lecturer, Varendra University</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer">
-            <div class="sig-line">Signature Of The Course Teacher</div>
-            <div class="marks-box">
-              <div class="box"></div>
-              <span>Obtained grade/marks</span>
-            </div>
-          </div>
-        </div>
-      </main>
+        </main>
     </div>
     <script src="script.js"></script>
-  </body>
+</body>
+
 </html>
